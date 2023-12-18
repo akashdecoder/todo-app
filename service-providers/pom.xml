@@ -11,6 +11,14 @@
 
     <artifactId>service-providers</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.todo.api</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>

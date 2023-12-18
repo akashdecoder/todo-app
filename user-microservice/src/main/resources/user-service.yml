@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microservice-user
+    username: postgres
+    password: Jenkins@2020
+    show-sql: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      .ddl-auto: update
+  application:
+    name: User Service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka
+    instance:
+      hostname: localhost
+      leaseRenewalIntervalInSeconds: 240

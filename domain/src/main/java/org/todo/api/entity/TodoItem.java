@@ -1,12 +1,16 @@
 package org.todo.api.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "todo-item")
 public class TodoItem {
 
