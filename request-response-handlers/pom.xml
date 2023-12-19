@@ -9,7 +9,18 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>exceptional-handling</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.todo.api</groupId>
+            <artifactId>dependency-containers</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <artifactId>request-response-handlers</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

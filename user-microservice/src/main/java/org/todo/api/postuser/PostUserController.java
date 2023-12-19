@@ -24,9 +24,9 @@ public class PostUserController {
         this.repositoryContainer = repositoryContainer;
     }
 
+    // Validation needs to be done in the validation phase.
     @PostMapping("")
-    public ResponseEntity<Object> addUser(@RequestBody User user) {
-        System.out.println(user.toString());
+    public ResponseEntity<Object> update(@RequestBody User user) {
         repositoryContainer.getIUserRepository().save(user);
         return new ResponseEntity<>(new AppError(HttpStatus.ACCEPTED, LocalDateTime.now(), user.toString() + " is created"), HttpStatus.ACCEPTED);
     }

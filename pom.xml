@@ -20,13 +20,12 @@
 		<module>domain</module>
 		<module>repository</module>
 		<module>dependency-containers</module>
-		<module>decorators</module>
-		<module>exceptional-handling</module>
-		<module>microservices</module>
+		<module>request-response-handlers</module>
 		<module>service-registration</module>
 		<module>user-microservice</module>
 		<module>todo-microservice</module>
-	</modules>
+        <module>api-gateway</module>
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
@@ -40,10 +39,6 @@
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-security</artifactId>-->
 <!--		</dependency>-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -15,7 +15,7 @@ spring:
     hibernate:
       .ddl-auto: update
   application:
-    name: Todo Service
+    name: todo-service
 
 eureka:
   client:

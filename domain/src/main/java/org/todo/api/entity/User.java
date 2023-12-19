@@ -11,7 +11,6 @@ import java.util.Set;
 @Data
 @Entity(name = "users")
 public class User {
-    private static final long serialVersionUID = 3295939280278710606L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
