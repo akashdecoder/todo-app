@@ -12,9 +12,14 @@
     <artifactId>todo-microservice</artifactId>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.todo.api</groupId>-->
+<!--            <artifactId>dependency-containers</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.todo.api</groupId>
-            <artifactId>dependency-containers</artifactId>
+            <artifactId>repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -33,6 +38,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
     </dependencies>
 
