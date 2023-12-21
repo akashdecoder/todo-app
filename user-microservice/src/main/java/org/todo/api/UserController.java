@@ -30,14 +30,14 @@ public class UserController {
 
         query = request.getQ().trim();
         try {
-            foundUsers = serviceContainer.getJpaUser().fetch(query);
+            foundUsers = serviceContainer.getHibernateUser().fetch(query, null);
             if(foundUsers == null) {
                 throw new Exception("User not found");
             }
         } catch (Exception e) {
             return new UserResponse(HttpStatus.NOT_FOUND, e.getMessage(), LocalDateTime.now(), null, null);
         }
-        return new UserResponse(HttpStatus.OK, "Users listed down", LocalDateTime.now(), foundUsers, null);
+        return new UserResponse(HttpStatus.OK, null, LocalDateTime.now(), foundUsers, null);
     }
 
     // Validation needs to be done in the validation phase.
@@ -46,11 +46,10 @@ public class UserController {
         List<User> users = new ArrayList<>();
         User user = request.getUser();
         try {
-            serviceContainer.getJpaUser().update(user);
-            users = serviceContainer.getJpaUser().fetch(user.getUserName());
+            serviceContainer.getHibernateUser().update(user, null);
         } catch (Exception e) {
             return new UserResponse(HttpStatus.ALREADY_REPORTED, e.getMessage(), LocalDateTime.now(), null, null);
         }
-        return new UserResponse(HttpStatus.ACCEPTED, "User added", LocalDateTime.now(), null, user);
+        return new UserResponse(HttpStatus.ACCEPTED, null, LocalDateTime.now(), null, user);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.todo.api.AppError;
 import org.todo.api.dependencycontainer.RepositoryContainer;
 import org.todo.api.entity.TodoItem;
+import org.todo.api.response.TodoResponse;
 
 import java.time.LocalDateTime;
 
@@ -25,13 +26,11 @@ public class PostTodoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> update(@RequestBody TodoItem todoItem) {
+    public TodoResponse update(@RequestBody TodoItem todoItem) {
 
         repositoryContainer.getITodoItemRepository().save(todoItem);
 
-
-
-        return new ResponseEntity<>(new AppError(HttpStatus.ACCEPTED, LocalDateTime.now(), todoItem.toString() + " is created"), HttpStatus.ACCEPTED);
+        return new TodoResponse(HttpStatus.ACCEPTED, "User Added", LocalDateTime.now(),null, todoItem);
     }
 }
 

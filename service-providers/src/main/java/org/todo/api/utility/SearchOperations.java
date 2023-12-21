@@ -34,10 +34,6 @@ public class SearchOperations {
                         return false;
                     }).toList();
         }
-        assert foundObjects != null;
-        if(!foundObjects.isEmpty()) {
-            return foundObjects;
-        }
-        return null;
+        return foundObjects;
     }
 }

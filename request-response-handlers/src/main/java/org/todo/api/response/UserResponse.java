@@ -16,7 +16,10 @@ import java.util.List;
 public class UserResponse {
 
     private HttpStatus httpStatus;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
+
     private LocalDateTime localDateTime;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
