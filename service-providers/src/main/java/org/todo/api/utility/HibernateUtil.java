@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.stereotype.Service;
+import org.todo.api.entity.TodoItem;
 import org.todo.api.entity.User;
 
 import java.util.Properties;
@@ -15,22 +16,25 @@ public class HibernateUtil {
     private SessionFactory sessionFactory;
     private final String JDBC_URL = "jdbc:postgresql://localhost:5432/";
 
-    public SessionFactory getSessionFactory(String dbName) {
-        if(sessionFactory == null) {
-            try {
-                Configuration configuration = new Configuration();
-                Properties properties = getProperties(dbName);
+    public SessionFactory getSessionFactory(String dbName, Object object) {
+        try {
+            Configuration configuration = new Configuration();
+            Properties properties = getProperties(dbName);
 
-                configuration.setProperties(properties);
+            configuration.setProperties(properties);
+
+            if(object == User.class) {
                 configuration.addAnnotatedClass(User.class);
-
-                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                        .applySettings(configuration.getProperties()).build();
-                
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } else {
+                configuration.addAnnotatedClass(TodoItem.class);
             }
+
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties()).build();
+
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return sessionFactory;
     }

@@ -2,6 +2,7 @@ package org.todo.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.todo.api.dependencycontainer.ServiceContainer;
 import org.todo.api.entity.User;
@@ -24,32 +25,32 @@ public class UserController {
     }
 
     @GetMapping
-    public UserResponse fetch(@RequestBody UserRequest request) {
+    public ResponseEntity<Object> fetch(@RequestBody UserRequest request) {
         List<User> foundUsers = new ArrayList<>();
         String query = "";
 
         query = request.getQ().trim();
         try {
-            foundUsers = serviceContainer.getHibernateUser().fetch(query, null);
+            foundUsers = serviceContainer.getHibernateUser().fetch(query);
             if(foundUsers == null) {
                 throw new Exception("User not found");
             }
         } catch (Exception e) {
-            return new UserResponse(HttpStatus.NOT_FOUND, e.getMessage(), LocalDateTime.now(), null, null);
+            return new ResponseEntity<>(new UserResponse(HttpStatus.NOT_FOUND, e.getMessage(), LocalDateTime.now(), null, null), HttpStatus.NOT_FOUND);
         }
-        return new UserResponse(HttpStatus.OK, null, LocalDateTime.now(), foundUsers, null);
+        return new ResponseEntity<>(new UserResponse(HttpStatus.OK, null, LocalDateTime.now(), foundUsers, null), HttpStatus.OK);
     }
 
     // Validation needs to be done in the validation phase.
     @PostMapping
-    public UserResponse update(@RequestBody UserRequest request) throws Exception {
+    public ResponseEntity<Object> update(@RequestBody UserRequest request) throws Exception {
         List<User> users = new ArrayList<>();
         User user = request.getUser();
         try {
-            serviceContainer.getHibernateUser().update(user, null);
+            serviceContainer.getHibernateUser().update(user);
         } catch (Exception e) {
-            return new UserResponse(HttpStatus.ALREADY_REPORTED, e.getMessage(), LocalDateTime.now(), null, null);
+            return new ResponseEntity<>(new UserResponse(HttpStatus.ALREADY_REPORTED, e.getMessage(), LocalDateTime.now(), null, null), HttpStatus.ALREADY_REPORTED);
         }
-        return new UserResponse(HttpStatus.ACCEPTED, null, LocalDateTime.now(), null, user);
+        return new ResponseEntity<>(new UserResponse(HttpStatus.ACCEPTED, null, LocalDateTime.now(), null, user), HttpStatus.ACCEPTED);
     }
 }

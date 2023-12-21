@@ -9,16 +9,17 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Data
+@Entity(name = "todo")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "todo-item")
 public class TodoItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "todoId")
     private Integer id;
 
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private Integer userId;
     private String title;
     private String description;

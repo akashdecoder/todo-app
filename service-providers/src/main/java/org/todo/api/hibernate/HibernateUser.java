@@ -24,14 +24,16 @@ public class HibernateUser {
     private static final String USER_DB = "microservice-user";
 
     private Session getCurrentSession() {
-        return hibernateUtil.getSessionFactory(USER_DB).openSession();
+        return hibernateUtil.getSessionFactory(USER_DB, User.class).openSession();
     }
 
-    public List<User> fetch(String q, Session session) throws Exception {
+    public List<User> fetch(String q) throws Exception {
+        Session currentSession = null;
         List<User> allUsers = new ArrayList<>();
         List<Object> objectUsers = new ArrayList<>();
         List<User> foundUsers = new ArrayList<>();
-        try (Session currentSession = session != null ? session : getCurrentSession()) {
+        try {
+            currentSession = getCurrentSession();
             allUsers = currentSession.createQuery("from users", User.class).list();
 
             objectUsers = allUsers.stream()
@@ -52,12 +54,12 @@ public class HibernateUser {
         }
     }
 
-    public void update(User user, Session session) throws Exception {
+    public void update(User user) throws Exception {
         Session currentSession = null;
         Transaction transaction = null;
         User existingUser = null;
         try {
-            List<User> users = fetch(user.getUserName(), null);
+            List<User> users = fetch(user.getUserName());
             currentSession = getCurrentSession();
             transaction = currentSession.beginTransaction();
             if(users.isEmpty()) {
