@@ -21,7 +21,7 @@ public class HibernateUser {
     @Autowired
     private SearchOperations searchOperations;
 
-    private static final String USER_DB = "microservice-user";
+    private static final String USER_DB = "user-microservice";
 
     private Session getCurrentSession() {
         return hibernateUtil.getSessionFactory(USER_DB, User.class).openSession();

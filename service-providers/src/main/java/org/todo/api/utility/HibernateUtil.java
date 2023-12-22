@@ -44,8 +44,8 @@ public class HibernateUtil {
 
         properties.put(Environment.DRIVER, "org.postgresql.Driver");
         properties.put(Environment.URL, JDBC_URL+dbName);
-        properties.put(Environment.USER, "postgres");
-        properties.put(Environment.PASS, "Jenkins@2020");
+        properties.put(Environment.USER, "admin");
+        properties.put(Environment.PASS, "admin");
 
         properties.put(Environment.SHOW_SQL, "true");
         properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");

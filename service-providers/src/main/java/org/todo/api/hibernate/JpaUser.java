@@ -21,11 +21,7 @@
 //    public void update(User user) throws Exception {
 //        List<User> users = fetch(user.getUserName());
 //        try {
-//            if(users == null) {
-//                userRepository.save(user);
-//            } else {
-//                throw new Exception("User already exists");
-//            }
+//            userRepository.save(user);
 //        } catch (Exception exception) {
 //            throw new Exception(exception.getMessage());
 //        }

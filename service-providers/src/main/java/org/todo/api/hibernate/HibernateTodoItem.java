@@ -21,7 +21,7 @@ public class HibernateTodoItem {
     @Autowired
     private SearchOperations searchOperations;
 
-    private static final String TODO_DB = "microservice-todo";
+    private static final String TODO_DB = "user-microservice";
 
     private Session getCurrentSession() {
         return hibernateUtil.getSessionFactory(TODO_DB, TodoItem.class).openSession();
