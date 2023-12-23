@@ -36,8 +36,13 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<Object> fetch(@RequestBody TodoItemRequest request) throws Exception {
         List<TodoItem> foundTodoItems = null;
+        String query = "";
+        query = request.getQ().trim();
         try {
-            foundTodoItems = serviceContainer.getHibernateTodoItem().fetch(request.getQ());
+            foundTodoItems = serviceContainer.getJpaTodoItem().fetch(query);
+            if(foundTodoItems.isEmpty()) {
+                throw new Exception("User not found");
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(new TodoResponse(HttpStatus.NOT_FOUND, e.getMessage(), LocalDateTime.now(), null, null), HttpStatus.NOT_FOUND);
         }
@@ -47,7 +52,7 @@ public class TodoController {
     @PostMapping
     public ResponseEntity<Object> update(@RequestBody TodoItem todoItem) {
         try {
-            serviceContainer.getHibernateTodoItem().update(todoItem);
+            serviceContainer.getJpaTodoItem().update(todoItem);
         } catch (Exception e) {
             return new ResponseEntity<>(new TodoResponse(HttpStatus.BAD_REQUEST, e.getMessage(), LocalDateTime.now(),null, todoItem), HttpStatus.BAD_REQUEST);
         }

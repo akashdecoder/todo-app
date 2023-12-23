@@ -3,10 +3,20 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+      routes:
+        - id: user-microservice
+          uri: lb://user-microservice
+          predicates:
+            - Path=/todo/users/**
+        - id: todo-microservice
+          uri: lb://todo-microservice
+          predicates:
+            - Path=/todo/items/**
+
 
 server:
   port: 8083

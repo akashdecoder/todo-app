@@ -31,8 +31,8 @@ public class UserController {
 
         query = request.getQ().trim();
         try {
-            foundUsers = serviceContainer.getHibernateUser().fetch(query);
-            if(foundUsers == null) {
+            foundUsers = serviceContainer.getJpaUser().fetch(query);
+            if(foundUsers.isEmpty()) {
                 throw new Exception("User not found");
             }
         } catch (Exception e) {
@@ -44,10 +44,9 @@ public class UserController {
     // Validation needs to be done in the validation phase.
     @PostMapping
     public ResponseEntity<Object> update(@RequestBody UserRequest request) throws Exception {
-        List<User> users = new ArrayList<>();
         User user = request.getUser();
         try {
-            serviceContainer.getHibernateUser().update(user);
+            serviceContainer.getJpaUser().update(user);
         } catch (Exception e) {
             return new ResponseEntity<>(new UserResponse(HttpStatus.ALREADY_REPORTED, e.getMessage(), LocalDateTime.now(), null, null), HttpStatus.ALREADY_REPORTED);
         }

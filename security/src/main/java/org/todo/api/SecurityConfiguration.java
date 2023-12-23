@@ -31,15 +31,15 @@
 //        return new BCryptPasswordEncoder();
 //    }
 //
-////    @Bean
-////    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-////        return httpSecurity
-////                .csrf(AbstractHttpConfigurer::disable)
-////                .cors(AbstractHttpConfigurer::disable)
-////                .authorizeHttpRequests(
-////                        (request) -> request
-////                                .requestMatchers("/**").permitAll()
-////                )
-////                .build();
-////    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .cors(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(
+//                        (request) -> request
+//                                .requestMatchers("/**").permitAll()
+//                )
+//                .build();
+//    }
 //}
