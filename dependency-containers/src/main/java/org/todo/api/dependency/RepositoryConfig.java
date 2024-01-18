@@ -7,6 +7,7 @@ import org.todo.api.dependencycontainer.RepositoryContainer;
 //import org.todo.api.repository.IAuthorityRepository;
 //import org.todo.api.repository.IRoleRepository;
 import org.todo.api.repository.ITodoItemRepository;
+import org.todo.api.repository.IUserCredentialRepository;
 import org.todo.api.repository.IUserRepository;
 
 @Configuration
@@ -20,9 +21,11 @@ public class RepositoryConfig {
     private ITodoItemRepository iTodoItemRepository;
     @Autowired
     private IUserRepository iUserRepository;
+    @Autowired
+    private IUserCredentialRepository iUserCredentialRepository;
 
     @Bean
     public RepositoryContainer repositoryContainer() {
-        return new RepositoryContainer(iTodoItemRepository, iUserRepository);
+        return new RepositoryContainer(iTodoItemRepository, iUserRepository, iUserCredentialRepository);
     }
 }

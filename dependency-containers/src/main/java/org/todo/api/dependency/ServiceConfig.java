@@ -8,6 +8,7 @@ import org.todo.api.hibernate.HibernateTodoItem;
 import org.todo.api.hibernate.HibernateUser;
 import org.todo.api.hibernate.JpaTodoItem;
 import org.todo.api.hibernate.JpaUser;
+import org.todo.api.services.SecurityService;
 import org.todo.api.utility.SearchOperations;
 
 @Configuration
@@ -28,8 +29,11 @@ public class ServiceConfig {
     @Autowired
     private HibernateTodoItem hibernateTodoItem;
 
+    @Autowired
+    private SecurityService securityService;
+
     @Bean
     public ServiceContainer serviceContainer() {
-        return new ServiceContainer(searchOperations, jpaUser, jpaTodoItem, hibernateUser, hibernateTodoItem);
+        return new ServiceContainer(searchOperations, jpaUser, jpaTodoItem, hibernateUser, hibernateTodoItem, securityService);
     }
 }

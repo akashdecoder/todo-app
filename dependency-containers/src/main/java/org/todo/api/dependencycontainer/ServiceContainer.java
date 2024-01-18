@@ -6,6 +6,7 @@ import org.todo.api.hibernate.JpaTodoItem;
 import org.todo.api.hibernate.JpaUser;
 import org.todo.api.hibernate.HibernateTodoItem;
 import org.todo.api.hibernate.HibernateUser;
+import org.todo.api.services.SecurityService;
 import org.todo.api.utility.SearchOperations;
 
 @AllArgsConstructor
@@ -16,4 +17,5 @@ public class ServiceContainer {
     private final JpaTodoItem jpaTodoItem;
     private final HibernateUser hibernateUser;
     private final HibernateTodoItem hibernateTodoItem;
+    private final SecurityService securityService;
 }

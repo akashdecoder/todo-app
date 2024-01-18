@@ -4,14 +4,24 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: user-microservice
-          uri: lb://user-service
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/todo/user/**
-        - id: todo-microservice
+          filters:
+            - AuthenticationFilter
+
+        - id: todo-service
           uri: lb://todo-service
           predicates:
             - Path=/todo/items/**
+          filters:
+            - AuthenticationFilter
+
+        - id: security-service
+          uri: lb://security-service
+          predicates:
+            - Path=/todo/auth/**
 
 
 server:

@@ -1,0 +1,19 @@
+server:
+  port: 8084
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/todo_db
+      username: mongo_1
+      password: Jenkins@2020
+  application:
+    name: security-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka
+    instance:
+      hostname: localhost
+      leaseRenewalIntervalInSeconds: 240
