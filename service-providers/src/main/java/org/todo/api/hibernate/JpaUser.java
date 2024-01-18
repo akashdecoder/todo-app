@@ -8,6 +8,7 @@ import org.todo.api.utility.SearchOperations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,12 +21,12 @@ public class JpaUser {
     private SearchOperations searchOperations;
 
     public void update(User user) throws Exception {
-        User existingUser = null;
+        Optional<User> existingUser = null;
         try {
             List<User> users = fetch(user.getUserName());
             if(!users.isEmpty()) {
-                if(user.getUserId() != null) {
-                    existingUser = userRepository.getReferenceById(user.getUserId());
+                if(user.getId() != null) {
+                    existingUser = userRepository.findById(user.getId());
                     if(existingUser.equals(user)) {
                         throw new Exception("At least update one value.");
                     }

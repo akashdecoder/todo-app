@@ -65,8 +65,8 @@ public class HibernateUser {
             if(users.isEmpty()) {
                 currentSession.persist(user);
             } else {
-                if(user.getUserId() != null) {
-                    existingUser = currentSession.byId(User.class).load(user.getUserId());
+                if(user.getId() != null) {
+                    existingUser = currentSession.byId(User.class).load(user.getId());
                     if(existingUser != null && !existingUser.equals(user)) {
                         currentSession.merge(user);
                     } else {

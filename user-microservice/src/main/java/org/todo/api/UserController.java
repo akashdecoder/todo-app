@@ -1,5 +1,7 @@
 package org.todo.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.todo.api.response.UserResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping("/todo/user")
@@ -25,13 +29,23 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> fetch(@RequestBody UserRequest request) {
+    public ResponseEntity<Object> fetchFromObject(@RequestBody Optional<UserRequest> requestBody, @RequestParam Optional<String> requestParam) {
         List<User> foundUsers = new ArrayList<>();
-        String query = "";
+        AtomicReference<String> query = new AtomicReference<>("");
 
-        query = request.getQ().trim();
+        requestBody.ifPresent(body -> query.set(requestBody.get().getQ().trim()));
+
+        requestParam.ifPresent(body -> {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                UserRequest userRequest = objectMapper.readValue(body, UserRequest.class);
+                query.set(userRequest.getQ());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        });
         try {
-            foundUsers = serviceContainer.getJpaUser().fetch(query);
+            foundUsers = serviceContainer.getJpaUser().fetch(query.get());
             if(foundUsers.isEmpty()) {
                 throw new Exception("User not found");
             }

@@ -8,6 +8,7 @@ import org.todo.api.utility.SearchOperations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,17 +41,15 @@ public class JpaTodoItem {
 
     public void update(TodoItem todoItem) throws Exception {
 
-        TodoItem existingTodoItem = null;
+        Optional<TodoItem> existingTodoItem = null;
         try {
             List<TodoItem> items = fetch(todoItem.getTitle());
             if(!items.isEmpty()) {
                 if(todoItem.getId() != null) {
-                    existingTodoItem = todoItemRepository.getReferenceById(todoItem.getId());
+                    existingTodoItem = todoItemRepository.findById(todoItem.getId());
                     if(existingTodoItem.equals(todoItem)) {
                         throw new Exception("At least update one value.");
                     }
-                } else {
-                    throw new Exception("Internal Error occurred. Please check the request,");
                 }
             }
             todoItemRepository.save(todoItem);

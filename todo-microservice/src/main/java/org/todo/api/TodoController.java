@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/todo/items")
 public class TodoController {
-    private String BASE_URL = "http://localhost:8081/todo/user";
+    private String BASE_URL = "http://user-service/todo/user";
 
     private final WebClient webClient;
 

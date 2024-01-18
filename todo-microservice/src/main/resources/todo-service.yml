@@ -2,18 +2,11 @@ server:
   port: 8082
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/microservice-todo-app
-    username: postgres
-    password: Jenkins@2020
-    show-sql: true
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-    hibernate:
-      .ddl-auto: update
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/todo_db
+      username: mongo_1
+      password: Jenkins@2020
   application:
     name: todo-service
 
